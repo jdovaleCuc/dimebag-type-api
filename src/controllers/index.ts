@@ -7,7 +7,7 @@ export default abstract class MainController implements Controller{
 
     constructor(public path:string, public name:string){
         this.router = Router({caseSensitive: true}) 
-        this.path = `${this.path}`
+        this.path = !path.startsWith('/') ? `/${this.path}` : this.path
     }
 
     ResponseHttp = (StatusCode: number, Data: IResponse, Response: Response) => {
