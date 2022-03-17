@@ -6,18 +6,9 @@ export default class AuthController extends MainController {
 
     constructor() {
         super('auth', AuthController.name);
-        this.router.route(`${this.path}/create`).post(this.CreateUser)
+        this.router.route(`${this.path}/create`).post()
     }
 
-    CreateUser = async (Request: Request, Response: Response) => {
-        setTimeout(() => {
-            this.ResponseHttp(HTTP_RESPONSE.OK, {
-                code: '20000',
-                error: false,
-                message: 'User created',
-                data: []
-            }, Response)    
-        }, 2000);
-    } 
+   
 
 }

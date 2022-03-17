@@ -14,3 +14,13 @@ export interface IResponse {
     message: string,
     data: any[]
 }
+
+export interface IUser {
+    id: number,
+    nombre: string,
+    apellidos: string,
+    tipo_identificacion:number,	
+    fecha_nacimiento: string	
+    estado: string	
+    atributos: any
+}
