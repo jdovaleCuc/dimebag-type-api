@@ -12,15 +12,25 @@ export interface IResponse {
     code: string,
     error: boolean,
     message: string,
-    data: any[]
+    data?: any[]
 }
 
-export interface IUser {
-    id: number,
-    nombre: string,
-    apellidos: string,
-    tipo_identificacion:number,	
-    fecha_nacimiento: string	
-    estado: string	
-    atributos: any
+export interface IValidator {
+    schema: IValidatorSchema[]
+    data: object,
+    extended: boolean
+}
+
+export interface IValidatorResponse{
+    validate: boolean
+    details: string
+    extra: any
+}
+
+interface IValidatorSchema {
+    type: string,
+    name: string,
+    isRequired: boolean,
+    min?: number,
+    max?: number
 }

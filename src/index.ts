@@ -16,6 +16,7 @@ const controllers: Controller[] = [
 
 let MapControllers:string = ''
 
+app.use(express.json())
 app.use(morgan(`${'[PETICION HTTP]'.magenta} *************** :url :status :response-time ms *** ${':method'.green}`))
 
 controllers.forEach((controller: Controller) => {

@@ -1,13 +1,11 @@
-import { IUser } from "../interfaces";
+import { IUser } from "../interfaces/user.interfaces";
 import { ConnectionDB } from "../libs/postgres";
 import { findAllUsers } from "./querys/user";
 
 
 export default class UserService {
     
-    constructor() {
-
-    }
+    constructor() {}
 
     async find(): Promise<IUser[]> {
         try {

@@ -19,8 +19,15 @@ export default abstract class MainController implements Controller{
         this.ResponseHttp(HTTP_RESPONSE.INTERNAL_ERROR, {
             code: '50000',
             error: true,
-            message: message ?? 'Error Interno',
-            data: []
+            message: message ?? 'Error Interno'
+        }, Response)
+    }
+
+    BadRequestError = (Response: Response, message?: string) => {
+        this.ResponseHttp(HTTP_RESPONSE.BAD_REQUEST, {
+            code: '40000',
+            error: true,
+            message: message ?? 'Error Interno'
         }, Response)
     }
 
