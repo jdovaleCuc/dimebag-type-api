@@ -1,6 +1,6 @@
 import { Router, Response } from "express";
 import { HTTP_RESPONSE } from "../utils";
-import { Controller, IResponse } from "../interfaces";
+import { Controller, IResponse, IValidatorDetails } from "../interfaces";
 
 export default abstract class MainController implements Controller{
      
@@ -23,11 +23,12 @@ export default abstract class MainController implements Controller{
         }, Response)
     }
 
-    BadRequestError = (Response: Response, message?: string) => {
+    BadRequestError = (Response: Response, message?: any, validate?: IValidatorDetails[]) => {
         this.ResponseHttp(HTTP_RESPONSE.BAD_REQUEST, {
             code: '40000',
             error: true,
-            message: message ?? 'Error Interno'
+            message: message ?? 'Error en datos enviados',
+            validate: validate
         }, Response)
     }
 

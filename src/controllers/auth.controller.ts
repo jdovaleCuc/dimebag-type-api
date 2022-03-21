@@ -8,7 +8,4 @@ export default class AuthController extends MainController {
         super('auth', AuthController.name);
         this.router.route(`${this.path}/create`).post()
     }
-
-   
-
 }

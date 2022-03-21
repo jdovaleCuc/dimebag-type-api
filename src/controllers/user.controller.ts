@@ -5,6 +5,8 @@ import UserService from "../services/user.service";
 import { ICreateUser, IUser } from "../interfaces/user.interfaces";
 import { validator } from "../validation/validator";
 import { IValidator } from "../interfaces";
+import logger from "../utils/logger";
+import { UserSchemas } from "../validation/schemas";
 
 
 export default class UserController extends MainController {
@@ -40,7 +42,7 @@ export default class UserController extends MainController {
                 data: data
             }, Response)
         } catch (error) {
-            console.log(error)
+            logger.OnError(error)
             this.InternalError(Response);
         }
     }
@@ -49,44 +51,18 @@ export default class UserController extends MainController {
         try {
             const data: ICreateUser = <ICreateUser>Request.body
             const validation: IValidator = {
-                schema: [
-                    {
-                        type: String.name.toString(),
-                        name: 'nombre',
-                        isRequired: true
-                    },
-                    {
-                        type: String.name.toString(),
-                        name: 'apellidos',
-                        isRequired: true
-                    },
-                    {
-                        type: Number.name.toString(),
-                        name: 'tipo_identificacion',
-                        isRequired: true
-                    },
-                    {
-                        type: Number.name.toString(),
-                        name: 'numeroIdentificacion',
-                        isRequired: true
-                    },
-                    {
-                        type: String.name.toString(),
-                        name: 'fecha_nacimiento',
-                        isRequired: true
-                    },
-                ],
+                schema: UserSchemas.create,
                 data: data,
                 extended: true
             }
             const res_validate = validator(validation);
             if (!res_validate.validate) {
-                this.BadRequestError(Response, res_validate.details)
+                this.BadRequestError(Response, null, res_validate.details)
                 return;
             }
             next()
         } catch (error) {
-            console.log(error)
+            logger.OnError(error)
             this.InternalError(Response, RESPONSE_API_MESSAGES.VALIDATE_ERROR)
         }
     }

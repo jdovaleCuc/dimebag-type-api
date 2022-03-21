@@ -12,7 +12,8 @@ export interface IResponse {
     code: string,
     error: boolean,
     message: string,
-    data?: any[]
+    data?: any[],
+    validate?: IValidatorDetails[]
 }
 
 export interface IValidator {
@@ -23,7 +24,7 @@ export interface IValidator {
 
 export interface IValidatorResponse{
     validate: boolean
-    details: string
+    details: IValidatorDetails[]
     extra: any
 }
 
@@ -33,4 +34,9 @@ interface IValidatorSchema {
     isRequired: boolean,
     min?: number,
     max?: number
+}
+
+export interface IValidatorDetails {
+    prop: string,
+    obs: string
 }

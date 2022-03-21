@@ -1,7 +1,6 @@
 import { IUser } from "../interfaces/user.interfaces";
-import { ConnectionDB } from "../libs/postgres";
 import { findAllUsers } from "./querys/user";
-
+import { DarellPool } from "../libs/darell.pool";
 
 export default class UserService {
     
@@ -9,8 +8,7 @@ export default class UserService {
 
     async find(): Promise<IUser[]> {
         try {
-            const Client = await ConnectionDB();
-            const response = await Client.query<IUser>(findAllUsers);
+            const response = await DarellPool.query<IUser>(findAllUsers);
             return response.rows;
         } catch (error) {
             throw error;
