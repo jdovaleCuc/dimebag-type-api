@@ -5,9 +5,10 @@ import colors from 'colors'
 import AuthController from './controllers/auth.controller';
 import { Controller } from './interfaces';
 import UserController from './controllers/user.controller';
+import { config } from './config';
 
 const app = express();
-const port = 8080;
+const port = config.port;
 
 const controllers: Controller[] = [
     new AuthController(),

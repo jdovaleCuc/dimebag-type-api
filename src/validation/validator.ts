@@ -1,4 +1,4 @@
-import { VALIDATOR_MESSAGES } from "../utils";
+import { DATA_TYPES, validateEmailExp, VALIDATOR_MESSAGES } from "../utils";
 import { IValidator, IValidatorDetails, IValidatorResponse } from "../interfaces";
 import logger from "../utils/logger";
 
@@ -19,6 +19,28 @@ export const validator = (data: IValidator): IValidatorResponse => {
                     prop: item.name,
                     obs: VALIDATOR_MESSAGES.IS_REQUIRED
                 })
+            continue;
+        }
+
+        if (item.type === DATA_TYPES.EMAIL) {
+            if (typeof props[item.name as keyof typeof props] !== (DATA_TYPES.STRING.toLocaleLowerCase())) {
+                response.validate = false;
+                details.push(
+                    {
+                        prop: item.name,
+                        obs: VALIDATOR_MESSAGES.WRONG_TYPE.replace('?', DATA_TYPES.STRING)
+                    })
+            }
+
+            if (!validateEmailExp.test(props[item.name as keyof typeof props])) {
+                response.validate = false;
+                details.push(
+                    {
+                        prop: item.name,
+                        obs: VALIDATOR_MESSAGES.WRONG_TYPE.replace('?', DATA_TYPES.EMAIL)
+                    })
+                
+            }
             continue;
         }
 

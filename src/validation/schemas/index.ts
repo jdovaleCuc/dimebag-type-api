@@ -1,4 +1,4 @@
-import { IValidator } from "../../interfaces";
+import { DATA_TYPES } from "../../utils";
 
 export const UserSchemas = {
     create: [
@@ -27,5 +27,37 @@ export const UserSchemas = {
             name: 'fecha_nacimiento',
             isRequired: true
         },
+        {
+            type: DATA_TYPES.EMAIL,
+            name: 'email',
+            isRequired: true
+        },
+        {
+            type: String.name.toString(),
+            name: 'usuario',
+            isRequired: true
+        },
+        {
+            type: String.name.toString(),
+            name: 'contraseña',
+            isRequired: true
+        }
+    ],
+    userDetails: [
+        {
+            type: DATA_TYPES.EMAIL,
+            name: 'email',
+            isRequired: true
+        },
+        {
+            type: String.name.toString(),
+            name: 'usuario',
+            isRequired: true
+        },
+        {
+            type: DATA_TYPES.PASSWORD,
+            name: 'contraseña',
+            isRequired: true
+        }
     ]
 }

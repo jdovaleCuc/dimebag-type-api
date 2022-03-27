@@ -20,4 +20,15 @@ export enum RESPONSE_API_MESSAGES {
     VALIDATE_ERROR = 'ERROR AL VALIDAR INFORMACION'
 }
 
+export enum DATA_TYPES {
+    NUMBER = 'Number',
+    STRING = 'String',
+    OBJECT = 'Object',
+    ARRAY = 'Array',
+    EMAIL = 'Email',
+    PASSWORD = 'Password'
+}
+
 export const DATE_FORMAT:string = 'YYYY-MM-DD HH:SS'
+
+export const validateEmailExp = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
