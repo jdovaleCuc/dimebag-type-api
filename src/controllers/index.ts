@@ -32,4 +32,12 @@ export default abstract class MainController implements Controller{
         }, Response)
     }
 
+    UnAutorizedError = (Response: Response, message?: any) => {
+        this.ResponseHttp(HTTP_RESPONSE.UNAUTHORIZED, {
+            code: '403000',
+            error: true,
+            message: message ?? 'Usuario no autorizado',
+        }, Response)
+    }
+
 }

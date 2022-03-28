@@ -12,9 +12,10 @@ import { UserSchemas } from "../validation/schemas";
 export default class UserController extends MainController {
 
     service: UserService;
+    
     constructor() {
         super('user', UserController.name);
-        this.service = new UserService()
+        this.service = new UserService();
 
         this.router.route(`${this.path}`).
             get(this.GetUsers).
