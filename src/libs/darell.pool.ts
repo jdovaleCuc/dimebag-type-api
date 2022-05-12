@@ -9,8 +9,8 @@ const URI = `postgres://${USER}:${PASSWORD}@${config.dbHost}:${config.dbPort}/${
 export const DarellPool = new Pool( { connectionString: URI })
 
 
-DarellPool.on('error', (error) => {
-    logger.OnError('Error en pool conection')
+DarellPool.on('error', (error: any) => {
+    logger.OnError(error)
 })
 
 

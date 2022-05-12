@@ -5,10 +5,12 @@ import colors from 'colors'
 import AuthController from './controllers/auth.controller';
 import { Controller } from './interfaces';
 import UserController from './controllers/user.controller';
+import text_formatter, { TYPES } from './utils/text_formatter';
 import { config } from './config';
 
 const app = express();
 const port = config.port;
+const _width = 60
 
 const controllers: Controller[] = [
     new AuthController(),
@@ -23,21 +25,22 @@ app.use(morgan(`${'[PETICION HTTP]'.magenta} *************** :url :status :respo
 controllers.forEach((controller: Controller) => {
     app.use('/api/v1.0/', controller.router)
     MapControllers += `${'[Controller Added]'.magenta} -------------> ${controller.path} *** ${`${controller.name}`.yellow}\n`
-})
+});
 
-const httpServer = new http.Server(app)
-
-httpServer.listen(port, () => {
-
-    console.log(`
-${'*'.repeat(21)} ${'Controllers'.yellow} ${'*'.repeat(21)}
+const _httpServer = new http.Server(app)
+const _topic = `
+${colors.yellow(text_formatter.align_text(' Controllers ', TYPES._CENTER, '*'))}
 
 ${MapControllers}
-${'='.repeat(55)}
-       Servidor HTTP corriendo en puerto ${colors.bold(`${port}`.magenta)}
-       ${'*'.repeat(11)} ${colors.bold.magenta('version @1.0.0')} ${'*'.repeat(11)}
+${'='.repeat(_width)}
+${text_formatter.align_text(`Servidor HTTP corriendo en puerto ${port}`,TYPES._CENTER)}
+${colors.magenta(text_formatter.align_text("*".repeat(8)+'version @1.0.0'+"*".repeat(8), TYPES._CENTER))}
 
-       ${colors.yellow('              DIMEBAG WS              ')}
-${'='.repeat(55)}
-    `)
+${colors.yellow(text_formatter.align_text('DIMEBAG WS', TYPES._CENTER))}
+${'='.repeat(_width)}`;
+
+_httpServer.listen(port, () => {
+    console.log(_topic);
 });
+
+
