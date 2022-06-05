@@ -1,6 +1,6 @@
-import { DATA_TYPES, validateEmailExp, VALIDATOR_MESSAGES } from "../utils";
-import { IValidator, IValidatorDetails, IValidatorResponse } from "../../domain/interfaces/app/interfaces";
-import logger from "../utils/logger";
+import { DATA_TYPES, validateEmailExp, VALIDATOR_MESSAGES } from "../../../utils";
+import { IValidator, IValidatorDetails, IValidatorResponse } from "../../../../domain/interfaces/app/interfaces";
+import logger from "../../../utils/logger/logger";
 
 export const validator = (data: IValidator): IValidatorResponse => {
 

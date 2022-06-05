@@ -1,9 +1,9 @@
-import { ICreateUser } from "../../../domain/interfaces/entities/user.interface";
-import { IUserDataSource } from "../../interfaces/data-sources/user.data.source";
-import UserRepository from "../../../domain/repositories/user.respository";
-import { User } from "../../orm/user-orm.model";
+import { ICreateUser, IUser } from "../interfaces/entities/user.interface";
+import { IUserDataSource } from "../../data/interfaces/data-sources/user.data.source";
+import UserRepository from "../repositories/user.respository";
+import { User } from "../../data/orm/entitys/user-orm.entity";
 
-export const UserDataSource: IUserDataSource = {
+const UserDataSource: IUserDataSource = {
   create: async (UserModel: ICreateUser) => {
     const user = new User();
 
@@ -15,8 +15,10 @@ export const UserDataSource: IUserDataSource = {
 
     await UserRepository.save(user);
   },
-  find: async (id: number) => {
+  find: async (id: number): Promise<IUser> => {
     const User = (await UserRepository.findBy({ id: id }))[0];
     return User;
   },
 };
+
+export default UserDataSource;

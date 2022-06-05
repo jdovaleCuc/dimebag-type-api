@@ -1,11 +1,11 @@
 import moment from 'moment'
-import { DATE_FORMAT } from '.'
+import { DATE_FORMAT } from '../index'
 
 export default {
 
-    OnError: (msg: string, error : Error | string = '') => {
-        console.log(`
-❌|${'[ERROR]'.bgRed} ${`${moment().format(DATE_FORMAT)}`.bgCyan} ${error}
+    OnError: (error : Error | string = '') => {
+        console.error(`
+❌|${'[ERROR]'.red} ${`${moment().format(DATE_FORMAT)}`.bgCyan} ${error}
         `)
     },
 
