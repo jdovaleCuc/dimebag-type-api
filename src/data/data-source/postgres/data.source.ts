@@ -1,5 +1,6 @@
-import { User } from "../../../domain/interfaces/entities/user.entity";
+import { User } from "../../../domain/models/entitys/user.entity";
 import { DataSource } from "typeorm";
+import { Identifiers } from "../../../domain/models/entitys/indentifier.entity";
 
 const PostgressDataSource = new DataSource({
     type: 'postgres',
@@ -9,8 +10,8 @@ const PostgressDataSource = new DataSource({
     password: '$Novus315.',
     database: 'cementary-gates',
     synchronize: true,
-    logging: true,
-    entities: [ User ],
+    logging: false,
+    entities: [ User, Identifiers ],
     subscribers: [],
     migrations: []
 })

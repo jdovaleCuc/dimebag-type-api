@@ -5,7 +5,7 @@ export interface IUser {
     apellidos: string,
     tipo_identificacion:number,	
     fecha_nacimiento: string	
-    estado: string	
+    estado: boolean	
     atributos: object
 }
 
@@ -13,7 +13,7 @@ export interface ICreateUser {
     nombre: string,
     apellidos: string,
     tipo_identificacion: number,
-    numeroIdentificacion: number,
+    numero_identificacion: number,
     fecha_nacimiento: string,
     credenciales: ICredencialUser
 }

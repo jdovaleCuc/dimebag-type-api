@@ -1,9 +1,18 @@
 import colors from "colors";
 import app from "./app/app";
 import CreateServer from "./app/config/server";
+import { InitDb } from '../src/data/data-source'
+import PostgressDataSource from "./data/data-source/postgres/data.source";
 import text_formatter, { TYPES } from "./infrastructure/utils/text_formatter";
 
-export default function Main(): void {
+export default async function Main(): Promise<void> {
+  /*
+  ** Inicializando base de datos 
+  */
+  await InitDb(PostgressDataSource)
+  /*
+  ** Creando server 
+  */
   const server = CreateServer(app);
 
   const _topic = `
