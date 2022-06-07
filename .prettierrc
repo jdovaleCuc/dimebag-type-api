@@ -1,0 +1,8 @@
+{
+    "tabWidth": 4,
+    "max_line_length": 500,
+    "indent_size":  4,
+    "bracketSameLine": true,
+    "useTabs": true,
+    "printWidth": 120
+}
