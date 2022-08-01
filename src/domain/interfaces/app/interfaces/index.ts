@@ -6,8 +6,6 @@ export interface Controller {
     name: string
 }
 
-// export interface HandlerReq {}
-
 export interface IResponse {
     code: string,
     error: boolean,

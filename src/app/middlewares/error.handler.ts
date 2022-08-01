@@ -2,16 +2,13 @@ import { NextFunction, Request, Response } from "express";
 import { HTTP_RESPONSE } from "../../infrastructure/utils";
 import { TypeORMError } from "typeorm";
 import logger from "../../infrastructure/utils/logger/logger";
+import { HttpRequestError } from "../../infrastructure/error/http.error";
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const ErrorHandler = (Err: Error, Request: Request, Response: Response, Next: NextFunction) => {
 	let statuscode = HTTP_RESPONSE.INTERNAL_ERROR;
 
 	logger.OnError(Err.stack);
-
-	if (Err.message.match(/not found/)) statuscode = HTTP_RESPONSE.NOT_FOUND;
-	if (Err.message.match(/Unauthorized/)) statuscode = HTTP_RESPONSE.UNAUTHORIZED;
-	if (Err.message.match(/is required/) || Err.message.match(/must be/)) statuscode = HTTP_RESPONSE.BAD_REQUEST;
 
 	let message = Err.message.replace(/['"]+/g, "");
 
@@ -21,6 +18,8 @@ export const ErrorHandler = (Err: Error, Request: Request, Response: Response, N
 	if (Err instanceof TypeORMError) {
 		message = Err.name;
 		statuscode = HTTP_RESPONSE.BAD_REQUEST;
+	} else if (Err instanceof HttpRequestError) {
+		statuscode = Err.status
 	}
 
 	return Response.status(statuscode).json({
@@ -31,5 +30,5 @@ export const ErrorHandler = (Err: Error, Request: Request, Response: Response, N
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 export const NotFoundHandler = (Req: Request, Res: Response, _Next: NextFunction) => {
-	_Next(new Error("Resource not found"));
+	Res.status(404).send('not found')
 };
